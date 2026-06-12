@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2020 CERN.
+# SPDX-FileCopyrightText: 2026 Graz University of Technology.
 # SPDX-License-Identifier: MIT
 
 """Invenio module to ease the creation and management of applications."""
@@ -27,6 +28,7 @@ class Commands(object):
     def pyshell(self, debug=False):
         """Start a Python shell."""
         pkg_man = self.cli_config.python_package_manager
+
         with env(FLASK_DEBUG="1" if debug else "0"):
             command = pkg_man.run_command("invenio", "shell")
             return run_interactive(command, env={"PIPENV_VERBOSITY": "-1"})

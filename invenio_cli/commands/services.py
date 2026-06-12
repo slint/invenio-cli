@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2020-2024 CERN.
 # SPDX-FileCopyrightText: 2021 Esteban J. G. Gabancho.
-# SPDX-FileCopyrightText: 2024-2025 Graz University of Technology.
+# SPDX-FileCopyrightText: 2024-2026 Graz University of Technology.
 # SPDX-License-Identifier: MIT
 
 """Invenio module to ease the creation and management of applications."""
@@ -139,8 +139,10 @@ class ServicesCommands(Commands):
         """Build default location path based on file storage selection."""
         file_storage = self.cli_config.get_file_storage()
         if file_storage == "local":
-            return "{}/data".format(self.cli_config.get_data_path())
-        return "{}://default".format(self.cli_config.get_file_storage().lower())
+            path_to_data = self.cli_config.get_data_path()
+            return f"{path_to_data}/data"
+
+        return f"{file_storage.lower()}://default"
 
     def _setup(self, demo_data=False):
         """Services initialization steps."""
